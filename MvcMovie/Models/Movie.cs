@@ -25,9 +25,9 @@ namespace MvcMovie.Models
 
 
         public string Genre { get; set; }
+        public string Rating { get; set; }
 
 
-   
         [Column(TypeName = "decimal(18, 2)")]
 
 
