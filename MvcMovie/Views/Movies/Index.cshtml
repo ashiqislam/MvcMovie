@@ -32,7 +32,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Movies[0].Price)
             </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.Movies[0].Rating)
             </th>
@@ -53,9 +52,8 @@
                 @Html.DisplayFor(modelItem => item.Genre)
             </td>
             <td>
-                $@Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>

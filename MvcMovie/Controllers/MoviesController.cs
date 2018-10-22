@@ -85,36 +85,6 @@ namespace MvcMovie.Controllers
         // GET: Movies/Create
         public IActionResult Create()
         {
-            List<SelectListItem> Ratings = new List<SelectListItem>();
-            Ratings.Add(new SelectListItem
-            {
-                Text = "Select",
-                Value = "1",
-                Selected = true
-            });
-            Ratings.Add(new SelectListItem
-            {
-                Text = "R",
-                Value = "2",
-            });
-            Ratings.Add(new SelectListItem
-            {
-                Text = "PG",
-                Value = "3"
-            });
-            Ratings.Add(new SelectListItem
-            {
-                Text = "PG-13",
-                Value = "4"
-            });
-            Ratings.Add(new SelectListItem
-            {
-                Text = "NR",
-                Value = "5"
-            });
-
-            ViewBag.Rate = Ratings;
-
             return View();
         }
 
