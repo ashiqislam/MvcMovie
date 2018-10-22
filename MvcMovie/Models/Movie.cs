@@ -29,7 +29,6 @@ namespace MvcMovie.Models
 
 
 
-
         [Required(ErrorMessage = "Please enter a valid price")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 2)")]
