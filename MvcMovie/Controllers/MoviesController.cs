@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
 
+
 namespace MvcMovie.Controllers
 {
     public class MoviesController : Controller
