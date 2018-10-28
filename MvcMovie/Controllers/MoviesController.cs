@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MvcMovie.Controllers
 {
@@ -18,25 +20,6 @@ namespace MvcMovie.Controllers
         {
             _context = context;
         }
-
-        // GET: Movies
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Movie.ToListAsync());
-        //}
-
-        //public async Task<IActionResult> Index(string searchString)
-        //{
-        //    var movies = from m in _context.Movie
-        //                 select m;
-
-        //    if (!String.IsNullOrEmpty(searchString))
-        //    {
-        //        movies = movies.Where(s => s.Title.Contains(searchString));
-        //    }
-
-        //    return View(await movies.ToListAsync());
-        //}
 
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
@@ -188,6 +171,35 @@ namespace MvcMovie.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movie.Any(e => e.ID == id);
+        }
+
+
+        public async Task<IActionResult> RetrieveData(string title)
+        {
+            HttpClient client = new HttpClient();
+
+            string url = "http://www.omdbapi.com/?t=" + (string)title + "&apikey=95a6f310";
+            var response = await client.GetAsync(url);
+            var data = await response.Content.ReadAsStringAsync();
+
+            var json = JsonConvert.DeserializeObject(data).ToString();
+            dynamic omdbMovie = JObject.Parse(json);
+
+            Movie movie = new Movie();
+            try
+            {
+                movie.Title = omdbMovie["Title"];
+                movie.ReleaseDate = omdbMovie["Released"];
+                movie.Genre = omdbMovie["Genre"];
+                movie.Rating = omdbMovie["Rated"];
+
+            }
+            catch
+            {
+                return View("Create");
+            }
+
+            return View("Create", movie);
         }
     }
 }
