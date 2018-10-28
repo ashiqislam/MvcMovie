@@ -1,11 +1,8 @@
 ﻿@model MvcMovie.Models.Movie
-
 @{
     ViewData["Title"] = "Details";
 }
-
 <h2>Details</h2>
-
 <div>
     <h4>Movie</h4>
     <hr />
@@ -35,6 +32,9 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
     </dl>
+</div>
+<div class="container">
+    <img src="@Html.DisplayFor(model => model.Poster)" />
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |

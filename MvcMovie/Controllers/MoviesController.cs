@@ -77,7 +77,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("ID,Title,ReleaseDate,Genre,Price,Rating, Poster")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,ReleaseDate,Genre,Price,Rating, Poster")] Movie movie)
         {
             if (id != movie.ID)
             {
@@ -185,13 +185,14 @@ namespace MvcMovie.Controllers
             var json = JsonConvert.DeserializeObject(data).ToString();
             dynamic omdbMovie = JObject.Parse(json);
 
-            Movie movie = new Movie();
+            Movie m = new Movie();
             try
             {
-                movie.Title = omdbMovie["Title"];
-                movie.ReleaseDate = omdbMovie["Released"];
-                movie.Genre = omdbMovie["Genre"];
-                movie.Rating = omdbMovie["Rated"];
+                m.Title = omdbMovie["Title"];
+                m.ReleaseDate = omdbMovie["Released"];
+                m.Genre = omdbMovie["Genre"];
+                m.Rating = omdbMovie["Rated"];
+                m.Poster = omdbMovie["Poster"];
 
             }
             catch
@@ -199,7 +200,7 @@ namespace MvcMovie.Controllers
                 return View("Create");
             }
 
-            return View("Create", movie);
+            return View("Create", m);
         }
     }
 }

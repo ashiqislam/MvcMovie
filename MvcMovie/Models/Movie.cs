@@ -26,7 +26,7 @@ namespace MvcMovie.Models
 
         public string Genre { get; set; }
         public string Rating { get; set; }
-
+        public string Poster { get; set; }
 
 
         [Required(ErrorMessage = "Please enter a valid price")]
