@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MvcMovie.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -15,10 +16,12 @@ namespace MvcMovie.Controllers
     public class MoviesController : Controller
     {
         private readonly MvcMovieContext _context;
+        private readonly string key;
 
-        public MoviesController(MvcMovieContext context)
+        public MoviesController(MvcMovieContext context, IConfiguration config)
         {
             _context = context;
+            key = config.GetValue<string>("APIKey");
         }
 
         public async Task<IActionResult> Index(string movieGenre, string searchString)
@@ -173,12 +176,11 @@ namespace MvcMovie.Controllers
             return _context.Movie.Any(e => e.ID == id);
         }
 
-
         public async Task<IActionResult> RetrieveData(string title)
         {
             HttpClient client = new HttpClient();
 
-            string url = "http://www.omdbapi.com/?t=" + (string)title + "&apikey=95a6f310";
+            string url = "http://www.omdbapi.com/?t=" + (string)title + key;
             var response = await client.GetAsync(url);
             var data = await response.Content.ReadAsStringAsync();
 
