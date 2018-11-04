@@ -25,6 +25,7 @@ namespace MvcMovie.Models
 
 
         public string Genre { get; set; }
+        public string Review { get; set; }
         public string Rating { get; set; }
         public string Poster { get; set; }
 
