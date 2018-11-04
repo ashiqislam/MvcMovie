@@ -14,11 +14,6 @@ namespace MvcMovie.Models
         public int ID { get; set; }
 
 
-        [Required]
-        [StringLength(50)]
-        //[Index("UniqueTitle", 1, IsUnique = true)] 
-        // -- Unique Movie Title not working due to outdated Entity.dll version, 
-        // -- wasn't sure if I was allowed to install latest version for this lab.
         public string Title { get; set; }
 
         
