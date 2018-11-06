@@ -10,7 +10,7 @@ namespace MvcMovie.Models
 {
     public class Movie
     {
-   
+        [Key]
         public int ID { get; set; }
 
 
@@ -25,9 +25,10 @@ namespace MvcMovie.Models
 
 
         public string Genre { get; set; }
-        public string Review { get; set; }
         public string Rating { get; set; }
         public string Poster { get; set; }
+        public string Reviewer { get; set; }
+        public string Comment { get; set; }
 
 
         [Required(ErrorMessage = "Please enter a valid price")]

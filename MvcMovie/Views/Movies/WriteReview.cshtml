@@ -1,0 +1,31 @@
+﻿@model MvcMovie.Models.ReviewsViewModel
+@{
+    ViewData["Title"] = "WriteReview";
+}
+<h2>Details</h2>
+<h4>Movie</h4>
+
+@using (Html.BeginForm("WriteReview", "Movies", FormMethod.Post))
+{
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Reviewer)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Reviewer)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Comment)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Comment)
+    </div>
+
+    // @Html.Hidden("BlogId", Model.Blog.BlogId)
+
+    <input type="submit" value="Send" class="actionButton" />
+}
+
+
+<a asp-action="Index">Back to List - Index</a>
+<a asp-action="Details">Back to List2- Details</a>
