@@ -56,7 +56,7 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.ReviewsViewModel
+            var movie = await _context.Movie
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (movie == null)
             {
