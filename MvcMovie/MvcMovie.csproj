@@ -7,9 +7,6 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\HomeController1.cs" />
-    <Compile Remove="Data\Customer.cs" />
-    <Compile Remove="Migrations\20181019232105_r.cs" />
-    <Compile Remove="Migrations\20181019232105_r.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

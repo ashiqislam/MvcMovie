@@ -10,7 +10,7 @@ using MvcMovie.Models;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20181019035433_Initial")]
+    [Migration("20181108102701_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,43 @@ namespace MvcMovie.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Comment");
+
                     b.Property<string>("Genre");
 
-                    b.Property<decimal>("Price");
+                    b.Property<string>("Poster");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Rating");
 
                     b.Property<DateTime>("ReleaseDate");
+
+                    b.Property<string>("Reviewer");
 
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
 
                     b.ToTable("Movie");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.ReviewsViewModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment");
+
+                    b.Property<string>("Reviewer");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ReviewsViewModel");
                 });
 #pragma warning restore 612, 618
         }

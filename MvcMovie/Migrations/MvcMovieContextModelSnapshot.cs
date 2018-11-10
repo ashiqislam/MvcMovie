@@ -46,6 +46,23 @@ namespace MvcMovie.Migrations
 
                     b.ToTable("Movie");
                 });
+
+            modelBuilder.Entity("MvcMovie.Models.ReviewsViewModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment");
+
+                    b.Property<string>("Reviewer");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ReviewsViewModel");
+                });
 #pragma warning restore 612, 618
         }
     }
