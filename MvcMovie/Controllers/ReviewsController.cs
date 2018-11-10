@@ -19,7 +19,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Reviews
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
             return View(await _context.ReviewsViewModel.ToListAsync());
         }
@@ -42,13 +42,13 @@ namespace MvcMovie.Controllers
             return View(reviewsViewModel);
         }
 
-        // GET: Reviews/Create
+        // GET: Movies/Reviews/Create/5
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Reviews/Create
+        // POST: Movies/Reviews/Create/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,7 +59,7 @@ namespace MvcMovie.Controllers
             {
                 _context.Add(reviewsViewModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Movies", new { id = reviewsViewModel.ID });
             }
             return View(reviewsViewModel);
         }

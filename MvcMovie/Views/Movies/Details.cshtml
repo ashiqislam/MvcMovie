@@ -1,4 +1,4 @@
-﻿@model MvcMovie.Models.Movie
+﻿@model MvcMovie.Models.ReviewsViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -8,45 +8,45 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Movies[0].Title)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Movies[0].Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
+            @Html.DisplayFor(model => model.Movies[0].ReleaseDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Movies[0].Genre)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Genre)
+            @Html.DisplayFor(model => model.Movies[0].Genre)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Movies[0].Price)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Movies[0].Price)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Reviewer)
+            @Html.DisplayNameFor(model => model.Movies[0].Reviewer)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Reviewer)
+            @Html.DisplayFor(model => model.Movies[0].Reviewer)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Comment)
+            @Html.DisplayNameFor(model => model.Movies[0].Comment)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Comment)
+            @Html.DisplayFor(model => model.Movies[0].Comment)
         </dd>
     </dl>
 </div>
 <div class="container">
-    <img src="@Html.DisplayFor(model => model.Poster)" />
+    <img src="@Html.DisplayFor(model => model.Movies[0].Poster)" />
     @ViewBag.Comment
 </div>
 <div>
@@ -57,14 +57,12 @@
 
 <h4 style="font-weight:bolder">Reviews</h4>
 
-    <h2>@ViewBag.Comment</h2>
-    <h2>@ViewBag.Author</h2>
 
-    <h2>@Model.Reviewer</h2>
-    <h2>@Model.Comment</h2>
 
+<h2>@Model.Reviewer</h2>
+<h2>@Model.Comment</h2>
 
 
 
-    <a asp-action="WriteReview" asp-route-id="@Model.ID"><input type="submit" class="btn btn-info" value="✎Write a Review" /></a>
+<a asp-controller="Reviews" asp-action="Create"><input type="submit" class="btn btn-info" value="✎Write a Review" /></a>
 

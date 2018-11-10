@@ -56,7 +56,7 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var movie = await _context.ReviewsViewModel
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (movie == null)
             {
@@ -66,11 +66,13 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
+
         // GET: Movies/Create
         public IActionResult Create()
         {
             return View();
         }
+
 
         // POST: Movies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
