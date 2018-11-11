@@ -24,49 +24,6 @@ namespace MvcMovie.Controllers
             return View(await _context.Reviews.ToListAsync());
         }
 
-        // GET: Reviews/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var reviews = await _context.Reviews
-                .FirstOrDefaultAsync(m => m.reviewID == id);
-            if (reviews == null)
-            {
-                return NotFound();
-            }
-
-            return View(reviews);
-        }
-
-        // GET: Reviews/Create
-        public IActionResult Create()
-        {
-            ViewBag.Reviewer = "";
-            ViewBag.Comment = "";
-            ViewBag.Title = "";
-            return View();
-        }
-
-        // POST: Reviews/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("reviewID,Reviewer,Comment,Title")] Reviews reviews)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(reviews);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(reviews);
-        }
 
         // GET: Reviews/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -41,9 +41,12 @@ namespace MvcMovie.Controllers
                 movies = movies.Where(x => x.Genre == movieGenre);
             }
 
-            var movieGenreVM = new MovieGenreViewModel();
-            movieGenreVM.Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
-            movieGenreVM.Movies = await movies.ToListAsync();
+
+            var movieGenreVM = new MovieGenreViewModel
+            {
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Movies = await movies.ToListAsync()
+            };
 
             return View(movieGenreVM);
         }
@@ -62,6 +65,8 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Title = movie.Title;
 
             return View(movie);
         }
@@ -87,7 +92,35 @@ namespace MvcMovie.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(movie);
+        }
+
+
+
+        // GET: Movies/WriteReview
+        public IActionResult WriteReview()
+        {
+            return View();
+        }
+
+
+        // POST: Movies/WriteReview
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                review.Title = ViewBag.Title;
+                return RedirectToAction("Index", "Reviews");
+            }
+
+            review.Title = ViewBag.Title;
+
+            return RedirectToAction("Index", "Reviews", review);
         }
 
         // GET: Movies/Edit/5
