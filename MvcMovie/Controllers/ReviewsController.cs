@@ -45,6 +45,9 @@ namespace MvcMovie.Controllers
         // GET: Reviews/Create
         public IActionResult Create()
         {
+            ViewBag.Reviewer = "";
+            ViewBag.Comment = "";
+            ViewBag.Title = "";
             return View();
         }
 
@@ -59,8 +62,16 @@ namespace MvcMovie.Controllers
             {
                 _context.Add(reviews);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = ViewBag.Reviewer + reviews.Reviewer;
+                ViewBag.Message = ViewBag.Comment + reviews.Comment;
+                ViewBag.Message = ViewBag.Title + reviews.Title;
+                return RedirectToAction("Index");
             }
+
+            ViewBag.Message = ViewBag.Reviewer + reviews.Reviewer;
+            ViewBag.Message = ViewBag.Comment + reviews.Comment;
+            ViewBag.Message = ViewBag.Title + reviews.Title;
+
             return View(reviews);
         }
 
