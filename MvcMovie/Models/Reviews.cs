@@ -20,6 +20,8 @@ namespace MvcMovie.Models
         public SelectList Reviews2;
         public string Reviewer { get; set; }
         public string Comment { get; set; }
+
+        [Display(Name = "Movie")]
         public string Title { get; set; }
     }
 }

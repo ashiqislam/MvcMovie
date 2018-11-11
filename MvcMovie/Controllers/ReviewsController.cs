@@ -62,15 +62,8 @@ namespace MvcMovie.Controllers
             {
                 _context.Add(reviews);
                 await _context.SaveChangesAsync();
-                ViewBag.Message = ViewBag.Reviewer + reviews.Reviewer;
-                ViewBag.Message = ViewBag.Comment + reviews.Comment;
-                ViewBag.Message = ViewBag.Title + reviews.Title;
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Message = ViewBag.Reviewer + reviews.Reviewer;
-            ViewBag.Message = ViewBag.Comment + reviews.Comment;
-            ViewBag.Message = ViewBag.Title + reviews.Title;
 
             return View(reviews);
         }
