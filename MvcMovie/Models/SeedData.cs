@@ -59,6 +59,43 @@ namespace MvcMovie.Models
                        Poster = ""
                    }
                 );
+
+                // Look for any reviews.
+                if (context.Reviews.Any())
+                {
+                    return;   // DB has been seeded
+                }
+
+                context.Reviews.AddRange(
+                     new Reviews
+                     {
+                         Title = "Test 1 Title",
+                         Comment = "TEST 2 Comment",
+                         Reviewer = "AUTH1"
+                     },
+
+                    new Reviews
+                    {
+                        Title = "Test 2 Title",
+                        Comment = "Test 2 Comment",
+                        Reviewer = "AUTH2"
+                    },
+                     new Reviews
+                     {
+                         Title = "TEST 3 Title",
+                         Comment = "TEST 3 Comment",
+                         Reviewer = "AUTH3"
+                     },
+
+                   new Reviews
+                   {
+                       Title = "TEST 4 Title",
+                       Comment = "TEST 4 Comment",
+                       Reviewer = "AUTH4"
+                   }
+
+                 );
+
                 context.SaveChanges();
             }
         }
