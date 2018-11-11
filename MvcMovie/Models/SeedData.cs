@@ -69,15 +69,15 @@ namespace MvcMovie.Models
                 context.Reviews.AddRange(
                      new Reviews
                      {
-                         Title = "Test 1 Title",
+                         Title = "TEST 1 Title",
                          Comment = "TEST 2 Comment",
                          Reviewer = "AUTH1"
                      },
 
                     new Reviews
                     {
-                        Title = "Test 2 Title",
-                        Comment = "Test 2 Comment",
+                        Title = "TEST 2 Title",
+                        Comment = "TEST 2 Comment",
                         Reviewer = "AUTH2"
                     },
                      new Reviews
