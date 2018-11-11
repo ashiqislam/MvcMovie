@@ -19,9 +19,9 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Reviews
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            return View(await _context.ReviewsViewModel.ToListAsync());
+            return View(await _context.Reviews.ToListAsync());
         }
 
         // GET: Reviews/Details/5
@@ -32,36 +32,36 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var reviewsViewModel = await _context.ReviewsViewModel
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (reviewsViewModel == null)
+            var reviews = await _context.Reviews
+                .FirstOrDefaultAsync(m => m.reviewID == id);
+            if (reviews == null)
             {
                 return NotFound();
             }
 
-            return View(reviewsViewModel);
+            return View(reviews);
         }
 
-        // GET: Movies/Reviews/Create/5
+        // GET: Reviews/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Reviews/Create/5
+        // POST: Reviews/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Reviewer,Comment, Title")] ReviewsViewModel reviewsViewModel)
+        public async Task<IActionResult> Create([Bind("reviewID,Reviewer,Comment,Title")] Reviews reviews)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reviewsViewModel);
+                _context.Add(reviews);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Movies", new { id = reviewsViewModel.ID });
+                return RedirectToAction(nameof(Index));
             }
-            return View(reviewsViewModel);
+            return View(reviews);
         }
 
         // GET: Reviews/Edit/5
@@ -72,12 +72,12 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var reviewsViewModel = await _context.ReviewsViewModel.FindAsync(id);
-            if (reviewsViewModel == null)
+            var reviews = await _context.Reviews.FindAsync(id);
+            if (reviews == null)
             {
                 return NotFound();
             }
-            return View(reviewsViewModel);
+            return View(reviews);
         }
 
         // POST: Reviews/Edit/5
@@ -85,9 +85,9 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Reviewer,Comment, Title")] ReviewsViewModel reviewsViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("reviewID,Reviewer,Comment,Title")] Reviews reviews)
         {
-            if (id != reviewsViewModel.ID)
+            if (id != reviews.reviewID)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace MvcMovie.Controllers
             {
                 try
                 {
-                    _context.Update(reviewsViewModel);
+                    _context.Update(reviews);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReviewsViewModelExists(reviewsViewModel.ID))
+                    if (!ReviewsExists(reviews.reviewID))
                     {
                         return NotFound();
                     }
@@ -112,7 +112,7 @@ namespace MvcMovie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(reviewsViewModel);
+            return View(reviews);
         }
 
         // GET: Reviews/Delete/5
@@ -123,14 +123,14 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var reviewsViewModel = await _context.ReviewsViewModel
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (reviewsViewModel == null)
+            var reviews = await _context.Reviews
+                .FirstOrDefaultAsync(m => m.reviewID == id);
+            if (reviews == null)
             {
                 return NotFound();
             }
 
-            return View(reviewsViewModel);
+            return View(reviews);
         }
 
         // POST: Reviews/Delete/5
@@ -138,15 +138,15 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reviewsViewModel = await _context.ReviewsViewModel.FindAsync(id);
-            _context.ReviewsViewModel.Remove(reviewsViewModel);
+            var reviews = await _context.Reviews.FindAsync(id);
+            _context.Reviews.Remove(reviews);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReviewsViewModelExists(int id)
+        private bool ReviewsExists(int id)
         {
-            return _context.ReviewsViewModel.Any(e => e.ID == id);
+            return _context.Reviews.Any(e => e.reviewID == id);
         }
     }
 }

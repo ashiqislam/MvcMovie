@@ -29,28 +29,40 @@ namespace MvcMovie.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReviewsViewModel",
+                name: "Reviews",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    reviewID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ID = table.Column<int>(nullable: true),
                     Reviewer = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReviewsViewModel", x => x.ID);
+                    table.PrimaryKey("PK_Reviews", x => x.reviewID);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Movie_ID",
+                        column: x => x.ID,
+                        principalTable: "Movie",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_ID",
+                table: "Reviews",
+                column: "ID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Movie");
+                name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "ReviewsViewModel");
+                name: "Movie");
         }
     }
 }

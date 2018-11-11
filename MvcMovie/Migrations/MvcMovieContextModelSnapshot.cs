@@ -47,21 +47,32 @@ namespace MvcMovie.Migrations
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.ReviewsViewModel", b =>
+            modelBuilder.Entity("MvcMovie.Models.Reviews", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("reviewID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comment");
 
+                    b.Property<int?>("ID");
+
                     b.Property<string>("Reviewer");
 
                     b.Property<string>("Title");
 
-                    b.HasKey("ID");
+                    b.HasKey("reviewID");
 
-                    b.ToTable("ReviewsViewModel");
+                    b.HasIndex("ID");
+
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.Reviews", b =>
+                {
+                    b.HasOne("MvcMovie.Models.Movie", "Reviews1")
+                        .WithMany()
+                        .HasForeignKey("ID");
                 });
 #pragma warning restore 612, 618
         }
