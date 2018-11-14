@@ -28,29 +28,6 @@ namespace MvcMovie.Controllers
 
 
 
-        // GET: Reviews/WriteReview/
-        public IActionResult WriteReview()
-        {
-            return View();
-        }
-
-
-        // POST: Reviews/WriteReview/
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
-        {
-            if (ModelState.IsValid)
-            {
- 
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Movies", new { id = 1 });
-            }
-
-            return View(review);
-        }
-
 
         // GET: Reviews/Edit/
         public async Task<IActionResult> Edit(int? id)
