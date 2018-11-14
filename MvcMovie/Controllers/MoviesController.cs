@@ -51,7 +51,7 @@ namespace MvcMovie.Controllers
             return View(movieGenreVM);
         }
 
-        // GET: Movies/Details/5
+        // GET: Movies/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -66,7 +66,6 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            ViewBag.Title = movie.Title;
 
             return View(movie);
         }
@@ -98,32 +97,8 @@ namespace MvcMovie.Controllers
 
 
 
-        // GET: Movies/WriteReview
-        public IActionResult WriteReview()
-        {
-            return View();
-        }
 
-
-        // POST: Movies/WriteReview
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-                review.Title = ViewBag.Title;
-                return RedirectToAction("Index", "Reviews");
-            }
-
-            review.Title = ViewBag.Title;
-
-            return RedirectToAction("Index", "Reviews", review);
-        }
-
-        // GET: Movies/Edit/5
+        // GET: Movies/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -139,7 +114,7 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Movies/Edit/
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -174,7 +149,7 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Movies/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -192,7 +167,7 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Movies/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

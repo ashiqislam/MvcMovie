@@ -7,21 +7,17 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\HomeController1.cs" />
+    <Compile Remove="Views\Reviews\WriteAReview.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Views\Movies\GetFromIMDB.cshtml" />
+    <Content Remove="Views\Reviews\Index - Copy.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Views\Movies\WriteReview.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
   </ItemGroup>
 
 </Project>

@@ -18,6 +18,8 @@ namespace MvcMovie.Controllers
             _context = context;
         }
 
+
+
         // GET: Reviews
         public async Task<IActionResult> Index()
         {
@@ -25,7 +27,32 @@ namespace MvcMovie.Controllers
         }
 
 
-        // GET: Reviews/Edit/5
+
+        // GET: Reviews/WriteReview/
+        public IActionResult WriteReview()
+        {
+            return View();
+        }
+
+
+        // POST: Reviews/WriteReview/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
+        {
+            if (ModelState.IsValid)
+            {
+ 
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "Movies", new { id = 1 });
+            }
+
+            return View(review);
+        }
+
+
+        // GET: Reviews/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -41,7 +68,7 @@ namespace MvcMovie.Controllers
             return View(reviews);
         }
 
-        // POST: Reviews/Edit/5
+        // POST: Reviews/Edit/
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -76,7 +103,7 @@ namespace MvcMovie.Controllers
             return View(reviews);
         }
 
-        // GET: Reviews/Delete/5
+        // GET: Reviews/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -94,7 +121,7 @@ namespace MvcMovie.Controllers
             return View(reviews);
         }
 
-        // POST: Reviews/Delete/5
+        // POST: Reviews/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
