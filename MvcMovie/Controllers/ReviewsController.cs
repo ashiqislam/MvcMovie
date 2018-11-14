@@ -28,6 +28,33 @@ namespace MvcMovie.Controllers
 
 
 
+        // GET: Reviews/WriteReview/
+        public IActionResult WriteReview(int? id)
+        {
+            ViewBag.MovTitle = TempData.Peek("MovTitle");
+            return View();
+        }
+
+
+        // POST: Reviews/WriteReview/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                TempData["MovieReviewer"] = review.Reviewer;
+                TempData["MovieComment"] = review.Comment;
+                return RedirectToAction("Details", "Movies", new { id = TempData.Peek("MovieID") });
+            }
+
+            return View(review);
+        }
+
+
 
         // GET: Reviews/Edit/
         public async Task<IActionResult> Edit(int? id)

@@ -231,38 +231,5 @@ namespace MvcMovie.Controllers
             return View("Create", m);
         }
 
-
-        // GET: Reviews/WriteReview/
-        //public IActionResult WriteReview()
-       // {
-       //     return View();
-        //}
-
-
-        // GET: Movies/WriteReview/
-        public IActionResult WriteReview(int? id)
-        {
-            ViewBag.MovTitle = TempData.Peek("MovTitle");
-            return View();
-        }
-
-
-        // POST: Movies/WriteReview/
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-                TempData["MovieReviewer"] = review.Reviewer;
-                TempData["MovieComment"] = review.Comment;
-                return RedirectToAction("Details", "Movies", new { id = TempData.Peek("MovieID") });
-            }
-
-            return View(review);
-        }
     }
 }

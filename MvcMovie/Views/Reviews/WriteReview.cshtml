@@ -2,11 +2,12 @@
 @{
     ViewData["Title"] = "WriteReview";
 }
-<h2>Details</h2>
-<h4>Movie</h4>
+
+<h2 class="active">Write your review of @ViewBag.MovTitle</h2>
 
 
-@using (Html.BeginForm("WriteReview", "Movies", FormMethod.Post))
+
+@using (Html.BeginForm("WriteReview", "Reviews", FormMethod.Post))
 {
 
     <div class="editor-label">
@@ -19,14 +20,13 @@
         @Html.LabelFor(model => model.Comment)
     </div>
     <div class="editor-field">
-        @Html.EditorFor(model => model.Comment)
+        @Html.TextAreaFor(model => model.Comment, htmlAttributes: new { style = "width: 75%; max-width: 100%;" })
     </div>
+    @Html.HiddenFor(x => x.Title, new { @Value = ViewBag.MovTitle });
 
-    // @Html.Hidden("BlogId", Model.Blog.BlogId)
 
-    <input type="submit" value="Send" class="actionButton" />
+    <div><p> </p></div>
+    <input type="submit" value="Submit" class="btn btn-info" />
+    <input type="submit" value="Back to Movie Details" class="btn btn-primary" />
 }
 
-
-<a asp-action="Index">Back to List - Index</a>
-<a asp-action="Details">Back to List2- Details</a>
