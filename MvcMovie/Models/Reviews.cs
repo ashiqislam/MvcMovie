@@ -16,7 +16,7 @@ namespace MvcMovie.Models
         [ForeignKey("ID")]
         public virtual Movie Reviews1 { get; set; }
 
-        public List<Movie> Movies;
+        public List<Reviews> revs;
         public SelectList Reviews2;
         public string Reviewer { get; set; }
         public string Comment { get; set; }

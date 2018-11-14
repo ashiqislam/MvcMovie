@@ -68,7 +68,21 @@ namespace MvcMovie.Controllers
 
 
             TempData["MovieID"] = id;
+            TempData["MovTitle"] = movie.Title;
             TempData.Keep();
+
+            ViewBag.Reviewer = TempData.Peek("MovieReviewer");
+            ViewBag.Comment = TempData.Peek("MovieComment");
+
+
+            List<string> authorsList = new List<string>();
+            authorsList.Add(ViewBag.Reviewer);
+
+            List<string> commentsList = new List<string>();
+            commentsList.Add(ViewBag.Comment);
+
+            ViewBag.Authors = authorsList;
+            ViewBag.Comments = commentsList;
 
 
             return View(movie);
@@ -228,6 +242,7 @@ namespace MvcMovie.Controllers
         // GET: Movies/WriteReview/
         public IActionResult WriteReview(int? id)
         {
+            ViewBag.MovTitle = TempData.Peek("MovTitle");
             return View();
         }
 
@@ -240,9 +255,10 @@ namespace MvcMovie.Controllers
 
             if (ModelState.IsValid)
             {
-
                 _context.Add(review);
                 await _context.SaveChangesAsync();
+                TempData["MovieReviewer"] = review.Reviewer;
+                TempData["MovieComment"] = review.Comment;
                 return RedirectToAction("Details", "Movies", new { id = TempData.Peek("MovieID") });
             }
 

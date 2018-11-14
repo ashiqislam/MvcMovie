@@ -44,7 +44,14 @@
     <a asp-action="Index"><input type="submit" value="Back to List" /></a>
 </div>
 
-<h4 style="font-weight:bolder">Reviews</h4>
+<h3 style="font-weight:bolder">Reviews</h3>
+
+
+<h5 style="color:blue">Reviewer: @ViewBag.Reviewer</h5>
+<h5  style="color:blue">Comment: @ViewBag.Comment</h5>
+
+
+
 
 
 <a asp-controller="Movies" asp-action="WriteReview"><input type="submit" class="btn btn-info" value="✎Write a Review" /></a>
