@@ -235,7 +235,7 @@ namespace MvcMovie.Controllers
         // POST: Movies/WriteReview/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> WriteReview([Bind("ID")] Movie movie, [Bind("ID, Reviewer, Comment, Title")] Reviews review)
+        public async Task<IActionResult> WriteReview([Bind("ID, Reviewer, Comment, Title")] Reviews review)
         {
 
             if (ModelState.IsValid)
